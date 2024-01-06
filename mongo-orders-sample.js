@@ -46,8 +46,8 @@ db.orders.insertMany([
             profit: 42.5,
             loss: 0
         },
-        timeframe: "4h",
-        strategy: "Ichimoku"
+        timeframe: ["4h", "1h"],
+        strategy: ["Ichimoku", "Price Action"]
     },
 ]);
 
