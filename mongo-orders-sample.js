@@ -166,13 +166,20 @@ db.orders.aggregate([
         }
     }
 ]);
-
 db.orders.aggregate([
     {
-        $group: {
-            _id: "$orderId",
-            properties: { $push: { name: "$date" } }
+        $lookup: {
+            from: 'users', localField: 'userId', foreignField: '_id', as: 'usr'
         }
+    },
+    {
+        $addFields: { username: "$usr.username" }
+    },
+    {
+        $group: { _id: "$orderId" }
+    },
+    {
+        $project: { _id: 1, username: 1 }
     }
 ])
 
